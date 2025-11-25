@@ -1,20 +1,30 @@
 package sispradia.api.dominio.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "registro_diario")
+@Getter
+@Setter
 public class RegistroDiario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(name = "data_registro", nullable = false)
     private LocalDate dataRegistro;
-    private boolean concluida;
+
+    @Column(name = "feito")
+    private boolean concluido;
+
     private String observacao;
 
+    @ManyToOne
+    @JoinColumn(name = "habito_id")
+    private Habito habito;
 }

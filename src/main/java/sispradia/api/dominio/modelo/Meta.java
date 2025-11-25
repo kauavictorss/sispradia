@@ -1,11 +1,14 @@
 package sispradia.api.dominio.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.time.LocalDate;
 
 @Entity
+@Getter
+@Setter
 public class Meta {
 
     @Id
@@ -15,7 +18,14 @@ public class Meta {
     private String titulo;
     private String descricao;
     private int quantidadeObjetivo;
-    private String periodo;
-    private String dataInicio;
-    private String dataFim;
+
+    @Enumerated(EnumType.STRING)
+    private Periodo periodo;
+
+    private LocalDate dataInicio;
+    private LocalDate dataFim;
+
+    @ManyToOne
+    @JoinColumn(name = "habito_id")
+    private Habito habito;
 }

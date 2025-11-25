@@ -1,11 +1,14 @@
 package sispradia.api.dominio.modelo;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import lombok.Getter;
+import lombok.Setter;
+
+import javax.persistence.*;
+import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class CategoriaHabito {
 
     @Id
@@ -14,4 +17,7 @@ public class CategoriaHabito {
 
     private String nome;
     private String descricao;
+
+    @OneToMany(mappedBy = "categoria")
+    List<Habito> habitos;
 }
