@@ -9,6 +9,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
+@Table(name = "usuario")
 @Getter
 @Setter
 @NoArgsConstructor
@@ -22,7 +23,7 @@ public class Usuario {
     private String email;
     private String senha;
 
-    @Column(nullable = false, updatable = false)
+    @Column(name = "data_criacao", nullable = false, updatable = false)
     private LocalDateTime dataCriacao;
 
     @OneToMany(mappedBy = "usuario")

@@ -7,6 +7,7 @@ import javax.persistence.*;
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "meta")
 @Getter
 @Setter
 public class Meta {
@@ -17,12 +18,17 @@ public class Meta {
 
     private String titulo;
     private String descricao;
+
+    @Column(name = "quantidade_objetivo")
     private int quantidadeObjetivo;
 
     @Enumerated(EnumType.STRING)
     private Periodo periodo;
 
+    @Column(name = "data_inicio")
     private LocalDate dataInicio;
+
+    @Column(name = "data_fim")
     private LocalDate dataFim;
 
     @ManyToOne
