@@ -1,4 +1,4 @@
-package sispradia.api.dominio.modelo;
+package sispradia.dominio.modelo;
 
 public enum Periodo {
     DIARIO,

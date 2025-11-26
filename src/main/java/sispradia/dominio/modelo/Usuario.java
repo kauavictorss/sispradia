@@ -1,4 +1,4 @@
-package sispradia.api.dominio.modelo;
+package sispradia.dominio.modelo;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -9,19 +9,26 @@ import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
-@Table(name = "usuario")
 @Getter
 @Setter
 @NoArgsConstructor
+@Table(name = "usuario")
 public class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean ativo;
+    @Column(name = "nome")
     private String nome;
+
+    @Column(name = "email")
     private String email;
+
+    @Column(name = "senha")
     private String senha;
+
+    @Column(name = "ativo")
+    private boolean ativo;
 
     @Column(name = "data_criacao", nullable = false, updatable = false)
     private LocalDateTime dataCriacao;

@@ -1,4 +1,4 @@
-package sispradia.api.dominio.modelo;
+package sispradia.dominio.modelo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -7,21 +7,26 @@ import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
-@Table(name = "habito")
 @Getter
 @Setter
+@Table(name = "habito")
 public class Habito {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private boolean ativo;
+    @Column(name = "titulo")
     private String titulo;
+
+    @Column(name = "descricao")
     private String descricao;
 
     @Column(name = "criado_em", nullable = false, updatable = false)
     private LocalDateTime dataCriacao;
+
+    @Column(name = "ativo")
+    private boolean ativo;
 
     @ManyToOne
     @JoinColumn(name = "usuario_id")
