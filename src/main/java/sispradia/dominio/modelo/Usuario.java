@@ -3,8 +3,10 @@ package sispradia.dominio.modelo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import sispradia.aplicacao.dto.CadastrarUsuarioDto;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -35,6 +37,13 @@ public class Usuario {
 
     @OneToMany(mappedBy = "usuario")
     List<Habito> habitos;
+
+    public Usuario(@Valid CadastrarUsuarioDto dados) {
+        this.ativo = true;
+        this.nome = dados.getNome();
+        this.email = dados.getEmail();
+        this.senha = dados.getSenha();
+    }
 
     @PrePersist
     protected void onCreate() {
