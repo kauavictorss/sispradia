@@ -9,8 +9,8 @@ import java.time.LocalDateTime;
 @Entity
 @Getter
 @Setter
-@Table(name = "habito")
-public class Habito {
+@Table(name = "pratica")
+public class Pratica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -34,7 +34,7 @@ public class Habito {
 
     @ManyToOne
     @JoinColumn(name = "categoria_id")
-    private CategoriaHabito categoria;
+    private CategoriaPratica categoria;
 
     @PrePersist
     protected void onCreate() {

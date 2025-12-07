@@ -9,8 +9,8 @@ import java.util.List;
 @Entity
 @Getter
 @Setter
-@Table(name = "categoria_habito")
-public class CategoriaHabito {
+@Table(name = "categoria_pratica")
+public class CategoriaPratica {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -23,5 +23,5 @@ public class CategoriaHabito {
     private String descricao;
 
     @OneToMany(mappedBy = "categoria")
-    List<Habito> habitos;
+    List<Pratica> praticas;
 }

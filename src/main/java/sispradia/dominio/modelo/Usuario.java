@@ -36,7 +36,7 @@ public class Usuario {
     private LocalDateTime dataCriacao;
 
     @OneToMany(mappedBy = "usuario")
-    List<Habito> habitos;
+    List<Pratica> praticas;
 
     public Usuario(@Valid CadastrarUsuarioDto dados) {
         this.ativo = true;

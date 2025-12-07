@@ -7,13 +7,13 @@ CREATE TABLE usuario (
     ativo TINYINT NOT NULL DEFAULT 1
 );
 
-CREATE TABLE categoria_habito (
+CREATE TABLE categoria_pratica (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     nome VARCHAR(100) NOT NULL,
     descricao VARCHAR(255)
 );
 
-CREATE TABLE habito (
+CREATE TABLE pratica (
     id BIGINT NOT NULL AUTO_INCREMENT PRIMARY KEY,
     titulo VARCHAR(100) NOT NULL,
     descricao VARCHAR(255),
@@ -22,7 +22,7 @@ CREATE TABLE habito (
     usuario_id BIGINT NOT NULL,
     categoria_id BIGINT,
     FOREIGN KEY (usuario_id) REFERENCES usuario(id),
-    FOREIGN KEY (categoria_id) REFERENCES categoria_habito(id)
+    FOREIGN KEY (categoria_id) REFERENCES categoria_pratica(id)
 );
 
 CREATE TABLE meta (
@@ -33,8 +33,8 @@ CREATE TABLE meta (
     periodo VARCHAR(20) NOT NULL,
     data_inicio DATE,
     data_fim DATE,
-    habito_id BIGINT NOT NULL,
-    FOREIGN KEY (habito_id) REFERENCES habito(id)
+    pratica_id BIGINT NOT NULL,
+    FOREIGN KEY (pratica_id) REFERENCES pratica(id)
 );
 
 CREATE TABLE registro_diario (
@@ -42,6 +42,6 @@ CREATE TABLE registro_diario (
     data_registro DATE NOT NULL,
     feito TINYINT NOT NULL DEFAULT 0,
     observacao TEXT,
-    habito_id BIGINT NOT NULL,
-    FOREIGN KEY (habito_id) REFERENCES habito(id)
+    pratica_id BIGINT NOT NULL,
+    FOREIGN KEY (pratica_id) REFERENCES pratica(id)
 );

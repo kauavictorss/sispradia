@@ -26,6 +26,6 @@ public class RegistroDiario {
     private String observacao;
 
     @ManyToOne
-    @JoinColumn(name = "habito_id")
-    private Habito habito;
+    @JoinColumn(name = "pratica_id")
+    private Pratica pratica;
 }
