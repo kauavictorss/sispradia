@@ -31,24 +31,25 @@ $env:Path += ";C:\Program Files\MySQL\MySQL Server 8.0\bin"
 
 ### 2. Configurar application.properties
 
-Crie o arquivo `src/main/resources/application.properties` com:
+Edite o arquivo `src/main/resources/application.properties` com suas credenciais:
 
 ```properties
-# Database
-spring.datasource.url=jdbc:mysql://localhost:3306/sispradia?useSSL=false&serverTimezone=UTC
+# Conexão com o banco de dados
+spring.datasource.url=jdbc:mysql://localhost:3306/sispradia
 spring.datasource.username=seu_usuario
 spring.datasource.password=sua_senha
-spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
 
-# JPA
-spring.jpa.hibernate.ddl-auto=validate
+spring.jpa.hibernate.ddl-auto=none
+
+# Mostrar SQL no console
 spring.jpa.show-sql=true
 spring.jpa.properties.hibernate.format_sql=true
-spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQL8Dialect
 
-# Flyway
-spring.flyway.enabled=true
+# Flyway funcionar em banco de dados existente
 spring.flyway.baseline-on-migrate=true
+
+# Porta do servidor
+server.port=8090
 ```
 
 ## 🔧 Instalação e Execução
@@ -72,11 +73,11 @@ Ou via wrapper:
 mvnw.cmd spring-boot:run   # Windows
 ```
 
-A aplicação estará disponível em: `http://localhost:8080`
+A aplicação estará disponível em: `http://localhost:8090`
 
 ## 🎨 Frontend
 
-O frontend será desenvolvido com **Vue 3** e estará disponível em: `http://localhost:8090`
+O frontend será desenvolvido com **Vue 3** e estará em uma porta separada
 
 ### Tecnologias Frontend
 - **Vue 3** - Framework progressivo
@@ -130,7 +131,7 @@ O projeto está preparado para implementação de segurança com JWT (JSON Web T
 ## 📝 API Documentation
 
 Após a execução, a documentação da API estará disponível em:
-- Swagger UI: `http://localhost:8080/swagger-ui.html` (quando configurado)
+- Swagger UI: `http://localhost:8090/swagger-ui.html` (quando configurado)
 
 ## 🤝 Contribuindo
 
