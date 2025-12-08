@@ -1,11 +1,17 @@
 package sispradia.aplicacao.dto;
 
+import lombok.AllArgsConstructor;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
 @Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class CadastrarUsuarioDto {
 
     @NotBlank
@@ -17,10 +23,4 @@ public class CadastrarUsuarioDto {
 
     @NotBlank
     private String senha;
-
-    public CadastrarUsuarioDto(String nome, String email, String senha) {
-        this.nome = nome;
-        this.email = email;
-        this.senha = senha;
-    }
 }
