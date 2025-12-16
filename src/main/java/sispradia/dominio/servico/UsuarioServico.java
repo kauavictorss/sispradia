@@ -15,7 +15,7 @@ public class UsuarioServico {
 
     public Usuario cadastrar(Usuario usuario) {
         if (repositorio.existsByEmail(usuario.getEmail())) {
-            throw new IllegalArgumentException("Já existe um usuário com esse email");
+            throw new IllegalArgumentException("Já existe um usuário com esse email!");
         }
 
         usuario.setDataCriacao(LocalDateTime.now());

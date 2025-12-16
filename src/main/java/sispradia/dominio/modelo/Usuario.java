@@ -3,7 +3,7 @@ package sispradia.dominio.modelo;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-import sispradia.aplicacao.dto.CadastrarUsuarioDto;
+import sispradia.aplicacao.dto.usuario.CadastrarUsuarioDto;
 
 import javax.persistence.*;
 import javax.validation.Valid;

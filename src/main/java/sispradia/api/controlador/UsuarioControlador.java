@@ -2,9 +2,9 @@ package sispradia.api.controlador;
 
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
-import sispradia.aplicacao.dto.CadastrarUsuarioDto;
-import sispradia.aplicacao.dto.ListarUsuarioDto;
-import sispradia.aplicacao.servico.UsuarioAplicacaoServico;
+import sispradia.aplicacao.dto.usuario.CadastrarUsuarioDto;
+import sispradia.aplicacao.dto.usuario.ListarUsuarioDto;
+import sispradia.aplicacao.servico.UsuarioAppServico;
 
 import javax.transaction.Transactional;
 import javax.validation.Valid;
@@ -14,7 +14,7 @@ import javax.validation.Valid;
 @RequestMapping("/usuarios")
 public class UsuarioControlador {
 
-    private final UsuarioAplicacaoServico servico;
+    private final UsuarioAppServico servico;
 
     @PostMapping
     @Transactional

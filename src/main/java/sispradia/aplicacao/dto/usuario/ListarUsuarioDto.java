@@ -1,4 +1,4 @@
-package sispradia.aplicacao.dto;
+package sispradia.aplicacao.dto.usuario;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
