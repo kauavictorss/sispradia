@@ -9,10 +9,19 @@ Sistema de Práticas Diárias - Uma aplicação para gerenciamento de práticas 
 - **Spring Boot 2.7.18**
 - **Spring Data JPA** - Persistência de dados
 - **Spring Validation** - Validação de dados
-- **MySQL 8** - Banco de dados
+- **MySQL 8.0.33** - Banco de dados
 - **Flyway** - Versionamento de banco de dados
 - **Lombok** - Redução de código boilerplate
 - **JUnit + Mockito** - Testes unitários
+
+> **📌 Nota sobre versões:**  
+> Este projeto utiliza **Java 8** e **Spring Boot 2.7.18** por serem as versões mais utilizadas no mercado brasileiro de desenvolvimento.
+> A escolha foi baseada em pesquisa de vagas, onde a maioria das empresas trabalha com Java 8 ou 11.
+> 
+> **Para ambientes de produção expostos publicamente**, recomenda-se avaliar atualização para versões mais recentes
+> (Java 17+ e Spring Boot 3.x) que recebem atualizações de segurança ativas.
+> 
+> **Para desenvolvimento local e aprendizado**, as versões utilizadas são adequadas e seguras.
 
 ## 📋 Pré-requisitos
 
@@ -102,27 +111,44 @@ mvn clean test jacoco:report
 
 ## 📁 Estrutura do Projeto
 
+O projeto segue a arquitetura em camadas (Layered Architecture) para melhor organização e manutenibilidade:
+
 ```
 sispradia/
 ├── src/
 │   ├── main/
 │   │   ├── java/
-│   │   │   └── sispradia/api/
-│   │   │       ├── config/          # Configurações
-│   │   │       ├── controller/      # Controllers REST
-│   │   │       ├── model/           # Entidades JPA
-│   │   │       ├── repository/      # Repositórios
-│   │   │       ├── service/         # Lógica de negócio
-│   │   │       ├── dto/             # Data Transfer Objects
-│   │   │       └── exception/       # Tratamento de exceções
+│   │   │   └── sispradia/
+│   │   │       ├── SispradiaApplication.java
+│   │   │       ├── api/                    # CAMADA API (Porta de entrada)
+│   │   │       │   └── controlador/        # Controllers REST
+│   │   │       ├── aplicacao/              # CAMADA APLICAÇÃO (Coordenação)
+│   │   │       │   ├── dto/                # Data Transfer Objects
+│   │   │       │   ├── conversor/          # Conversores DTO ↔ Entidade
+│   │   │       │   └── servico/            # Serviços de aplicação
+│   │   │       ├── dominio/                # CAMADA DOMÍNIO (Regras de negócio)
+│   │   │       │   ├── modelo/             # Entidades JPA
+│   │   │       │   ├── repositorio/        # Repositórios
+│   │   │       │   └── servico/            # Serviços de domínio
+│   │   │       └── excecao/                # Tratamento de exceções
 │   │   └── resources/
 │   │       ├── application.properties
-│   │       └── db/migration/        # Scripts Flyway
+│   │       └── db/migration/               # Scripts Flyway
 │   └── test/
-│       └── java/                    # Testes unitários e integração
+│       └── java/                           # Testes unitários e integração
 ├── pom.xml
 └── README.md
 ```
+
+### 📚 Arquitetura em Camadas
+
+O projeto utiliza **separação em camadas** para melhor organização:
+
+- **API**: Recebe requisições HTTP e retorna respostas (Controllers)
+- **Aplicação**: Coordena o fluxo, busca dependências e faz conversões (DTOs, Conversores, Serviços de Aplicação)
+- **Domínio**: Contém as regras de negócio e lógica central (Entidades, Repositórios, Serviços de Domínio)
+
+Para entender melhor a arquitetura, consulte o arquivo [GUIA_SPRING_BOOT_ARQUITETURA.md](./GUIA_SPRING_BOOT_ARQUITETURA.md).
 
 ## 🔐 Segurança
 
