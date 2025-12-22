@@ -51,7 +51,7 @@ public class UsuarioServico {
         if (nome == null || nome.trim().isEmpty()) {
             throw new IllegalArgumentException("O nome não pode ser vazio");
         }
-        return repositorio.findByNomeContainingIgnoreCase(nome);
+        return repositorio.findByNome(nome);
     }
 
     public Usuario atualizar(Usuario usuarioAtualizado, Usuario usuarioExistente) {
