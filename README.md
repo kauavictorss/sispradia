@@ -171,9 +171,16 @@ Após a execução, a documentação da API estará disponível em:
 
 Este projeto está sob a licença MIT.
 
-## 👥 Autores
+## 👨‍💻 Autor
 
-**Kauã Victor** - Equipe SISPRADIA
+<div align="center">
+  <img src="https://github.com/kauavictorss.png" width="150px" style="border-radius: 50%;" alt="Kauã Victor"/>
+  <br>
+  <h1>Kauã Victor Silva dos Santos</h1>
+  
+[![GitHub](https://img.shields.io/badge/-GitHub-181717?style=for-the-badge&logo=github&logoColor=white)](https://github.com/kauavictorss)
+[![LinkedIn](https://img.shields.io/badge/-LinkedIn-0A66C2?style=for-the-badge&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/kaua-victor-santos/)
+</div>
 
 Desenvolvido com ❤️
 
