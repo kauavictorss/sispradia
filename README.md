@@ -1,27 +1,82 @@
-# SISPRADIA
+# SHD API
 
-Sistema de Práticas Diárias - Uma aplicação para gerenciamento de práticas e atividades do dia a dia.
+#### Sistema de Hábitos Diários
+
+Uma API para acompanhamento e gerenciamento de hábitos e práticas diárias — construída como um projeto de estudo de **manutenção e boas práticas em um stack legado (Java 8 + Spring Boot 2.7.x)**, muito próximo do que se encontra no mercado brasileiro.
+
+> 🔁 Este projeto nasceu como `sispradia-api` e foi renomeado para `shd-api` para refletir melhor seu propósito.
+
+**Status:** 🚧 Em desenvolvimento
+
+---
+
+## 🎯 Objetivo do projeto
+
+Além de construir uma API funcional de hábitos diários, este repositório existe para praticar:
+
+- Manutenção e evolução de um sistema em stack "legado" (Java 8 / Spring Boot 2.7.x), muito comum em vagas Brasil afora
+- Fundamentos sólidos de Programação Orientada a Objetos (encapsulamento, polimorfismo, composição, SOLID) aplicados a um domínio real
+- Arquitetura em camadas e boas práticas de engenharia que independem da versão do framework
 
 ## 🚀 Tecnologias
 
 ### Backend
+
 - **Java 8**
 - **Spring Boot 2.7.18**
-- **Spring Data JPA** - Persistência de dados
-- **Spring Validation** - Validação de dados
-- **MySQL 8.0.33** - Banco de dados
-- **Flyway** - Versionamento de banco de dados
-- **Lombok** - Redução de código boilerplate
-- **JUnit + Mockito** - Testes unitários
+- **Spring Data JPA** — persistência de dados
+- **Spring Validation** — validação de dados de entrada
+- **MySQL 8.0.33** — banco de dados relacional
+- **Flyway** — versionamento e migração de schema
+- **Lombok** — redução de boilerplate
+- **JUnit 5 + Mockito** — testes unitários e de integração
 
-> **📌 Nota sobre versões:**  
-> Este projeto utiliza **Java 8** e **Spring Boot 2.7.18** por serem as versões mais utilizadas no mercado brasileiro de desenvolvimento.
-> A escolha foi baseada em pesquisa de vagas, onde a maioria das empresas trabalha com Java 8 ou 11.
-> 
-> **Para ambientes de produção expostos publicamente**, recomenda-se avaliar atualização para versões mais recentes
-> (Java 17+ e Spring Boot 3.x) que recebem atualizações de segurança ativas.
-> 
-> **Para desenvolvimento local e aprendizado**, as versões utilizadas são adequadas e seguras.
+> **📌 Nota sobre as versões**
+> Este projeto usa deliberadamente **Java 8** e **Spring Boot 2.7.x**, por serem as versões mais recorrentes em vagas de backend no mercado brasileiro. A ideia é treinar manutenção de legado com qualidade, não apenas escrever código em uma stack desatualizada.
+>
+> Uma futura migração para **Java 17+ / Spring Boot 3.x** está no roadmap como exercício documentado à parte (veja [Roadmap](#-roadmap)), e não como pré-requisito para este projeto evoluir.
+
+### Frontend (planejado)
+
+- **Vue 3** — framework progressivo
+- **Pinia** — gerenciamento de estado
+- **Vue Router** — roteamento
+- **Axios** — cliente HTTP
+
+## 📁 Arquitetura
+
+O projeto segue arquitetura em camadas (Layered Architecture):
+
+```
+shd-api/
+├── src/
+│   ├── main/
+│   │   ├── java/
+│   │   │   └── shd/
+│   │   │       ├── ShdApplication.java
+│   │   │       ├── api/                 # Camada API — controllers REST
+│   │   │       │   └── controlador/
+│   │   │       ├── aplicacao/           # Camada Aplicação — coordenação
+│   │   │       │   ├── dto/
+│   │   │       │   ├── conversor/
+│   │   │       │   └── servico/
+│   │   │       ├── dominio/             # Camada Domínio — regras de negócio
+│   │   │       │   ├── modelo/
+│   │   │       │   ├── repositorio/
+│   │   │       │   └── servico/
+│   │   │       └── excecao/             # Tratamento de exceções
+│   │   └── resources/
+│   │       ├── application.properties
+│   │       └── db/migration/            # Scripts Flyway
+│   └── test/
+│       └── java/                        # Testes unitários e de integração
+├── pom.xml
+└── README.md
+```
+
+- **API**: recebe requisições HTTP e retorna respostas (controllers)
+- **Aplicação**: coordena o fluxo, faz conversões DTO ↔ entidade
+- **Domínio**: contém entidades, repositórios e regras de negócio centrais
 
 ## 📋 Pré-requisitos
 
@@ -30,140 +85,91 @@ Sistema de Práticas Diárias - Uma aplicação para gerenciamento de práticas 
 - MySQL 8.0+
 - IDE de sua preferência (IntelliJ IDEA, Eclipse, VS Code)
 
-## ⚙️ Configuração do Ambiente
+## ⚙️ Configuração do ambiente
 
-### 1. Configurar MySQL no PATH (Windows)
+### 1. Configurar variáveis de ambiente
 
-```powershell
-$env:Path += ";C:\Program Files\MySQL\MySQL Server 8.0\bin"
+Copie o arquivo de exemplo e preencha com suas credenciais locais:
+
+```bash
+cp .env.example .env
 ```
 
-### 2. Configurar application.properties
+> Nunca commite credenciais reais. `application.properties` deve referenciar variáveis de ambiente, ex: `${DB_USER}`, `${DB_PASSWORD}`.
 
-Edite o arquivo `src/main/resources/application.properties` com suas credenciais:
+### 2. Banco de dados
 
 ```properties
-# Conexão com o banco de dados
-spring.datasource.url=jdbc:mysql://localhost:3306/sispradia
-spring.datasource.username=seu_usuario
-spring.datasource.password=sua_senha
+spring.datasource.url=jdbc:mysql://localhost:3306/shd
+spring.datasource.username=${DB_USER}
+spring.datasource.password=${DB_PASSWORD}
 
 spring.jpa.hibernate.ddl-auto=none
-
-# Mostrar SQL no console
-spring.jpa.show-sql=true
-spring.jpa.properties.hibernate.format_sql=true
-
-# Flyway funcionar em banco de dados existente
 spring.flyway.baseline-on-migrate=true
 
-# Porta do servidor
 server.port=8090
 ```
 
-## 🔧 Instalação e Execução
-
-### Compilar o projeto
+## 🔧 Instalação e execução
 
 ```bash
+# Compilar
 mvn clean install
-```
 
-### Executar a aplicação
-
-```bash
+# Executar
 mvn spring-boot:run
-```
 
-Ou via wrapper:
-
-```bash
+# Ou via wrapper
 ./mvnw spring-boot:run     # Linux/Mac
 mvnw.cmd spring-boot:run   # Windows
 ```
 
-A aplicação estará disponível em: `http://localhost:8090`
-
-## 🎨 Frontend
-
-O frontend será desenvolvido com **Vue 3** e estará em uma porta separada
-
-### Tecnologias Frontend
-- **Vue 3** - Framework progressivo
-- **BootstrapVue Next** - Componentes UI
-- **Axios** - Cliente HTTP
-- **Vue Router** - Roteamento
-- **Pinia** - Gerenciamento de estado
+A aplicação estará disponível em `http://localhost:8090`.
 
 ## 🧪 Testes
 
-### Executar todos os testes
-
 ```bash
+# Todos os testes
 mvn test
-```
 
-### Executar com cobertura
-
-```bash
+# Com cobertura (Jacoco)
 mvn clean test jacoco:report
 ```
 
-## 📁 Estrutura do Projeto
+Estratégia de testes adotada:
 
-O projeto segue a arquitetura em camadas (Layered Architecture) para melhor organização e manutenibilidade:
+- **Unitários** — JUnit 5 + Mockito, isolando serviços de domínio
+- **Fatiados** — `@WebMvcTest` (controllers) e `@DataJpaTest` (repositórios)
+- **Integração** — `@SpringBootTest` com banco real via Testcontainers
 
-```
-sispradia/
-├── src/
-│   ├── main/
-│   │   ├── java/
-│   │   │   └── sispradia/
-│   │   │       ├── SispradiaApplication.java
-│   │   │       ├── api/                    # CAMADA API (Porta de entrada)
-│   │   │       │   └── controlador/        # Controllers REST
-│   │   │       ├── aplicacao/              # CAMADA APLICAÇÃO (Coordenação)
-│   │   │       │   ├── dto/                # Data Transfer Objects
-│   │   │       │   ├── conversor/          # Conversores DTO ↔ Entidade
-│   │   │       │   └── servico/            # Serviços de aplicação
-│   │   │       ├── dominio/                # CAMADA DOMÍNIO (Regras de negócio)
-│   │   │       │   ├── modelo/             # Entidades JPA
-│   │   │       │   ├── repositorio/        # Repositórios
-│   │   │       │   └── servico/            # Serviços de domínio
-│   │   │       └── excecao/                # Tratamento de exceções
-│   │   └── resources/
-│   │       ├── application.properties
-│   │       └── db/migration/               # Scripts Flyway
-│   └── test/
-│       └── java/                           # Testes unitários e integração
-├── pom.xml
-└── README.md
-```
+## 📝 Documentação da API
 
-### 📚 Arquitetura em Camadas
+Com a aplicação em execução:
 
-O projeto utiliza **separação em camadas** para melhor organização:
-
-- **API**: Recebe requisições HTTP e retorna respostas (Controllers)
-- **Aplicação**: Coordena o fluxo, busca dependências e faz conversões (DTOs, Conversores, Serviços de Aplicação)
-- **Domínio**: Contém as regras de negócio e lógica central (Entidades, Repositórios, Serviços de Domínio)
-
-Para entender melhor a arquitetura, consulte o arquivo [GUIA_SPRING_BOOT_ARQUITETURA.md](./GUIA_SPRING_BOOT_ARQUITETURA.md).
+- Swagger UI: `http://localhost:8090/swagger-ui.html`
 
 ## 🔐 Segurança
 
-O projeto está preparado para implementação de segurança com JWT (JSON Web Token). A configuração de segurança será adicionada em breve.
+Autenticação/autorização via JWT está planejada — ver [Roadmap](#-roadmap).
 
-## 📝 API Documentation
+## 🗺️ Roadmap
 
-Após a execução, a documentação da API estará disponível em:
-- Swagger UI: `http://localhost:8090/swagger-ui.html` (quando configurado)
+- [ ] Modelagem de domínio: `Usuario`, `Habito`, `RegistroDiario`
+- [ ] CRUD completo de hábitos
+- [ ] Registro e histórico de execução diária
+- [ ] Tratamento global de exceções (`@ControllerAdvice`)
+- [ ] Documentação via springdoc-openapi
+- [ ] Autenticação JWT
+- [ ] Pipeline de CI (GitHub Actions) rodando testes a cada push
+- [ ] Cobertura de testes com Testcontainers
+- [ ] Frontend em Vue 3
+- [ ] *(Exercício à parte)* Migração documentada para Java 17+ / Spring Boot 3.x
 
 ## 🤝 Contribuindo
 
 1. Faça um fork do projeto
 2. Crie uma branch para sua feature (`git checkout -b feature/MinhaFeature`)
-3. Commit suas mudanças (`git commit -m 'Adiciona MinhaFeature'`)
+3. Commit suas mudanças seguindo Conventional Commits (`git commit -m 'feat: adiciona MinhaFeature'`)
 4. Push para a branch (`git push origin feature/MinhaFeature`)
 5. Abra um Pull Request
 
@@ -183,7 +189,3 @@ Este projeto está sob a licença MIT.
 </div>
 
 Desenvolvido com ❤️
-
----
-
-**Status:** 🚧 Em desenvolvimento
